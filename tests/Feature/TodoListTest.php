@@ -22,14 +22,21 @@ class TodoListTest extends TestCase
 
         //preparation //prepare
 
-        TodoList::create(['name' => 'my list']);
+//        TodoList::create(['name' => 'my list']);
+        $lists = TodoList::factory()->count(2)->create(['name' => 'my List']);
+
+
+
 
         //action //perform
         $response = $this->getJson(route('todo-list.store'));
 
 
+
         //assertion //predict
-        $this->assertEquals(1,count($response->json()));
+        $this->assertEquals(2,count($response->json()));
+        $this->assertEquals('my List',$response->json()[0]['name']);
+         dd($response->json()[0]['name']);
 
 
     }
