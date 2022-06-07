@@ -21,7 +21,7 @@ class TestTest extends TestCase
 
         //action
         $response = $this->getJson(route('test'));
-  
+
 
 
         //assertion
