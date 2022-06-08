@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('todo-list',[TodoListController::class,'index'])->name('todo-list.store');
+Route::get('todo-list',[TodoListController::class,'index'])->name('todo-list.index');
 
 Route::get('todo-list/{todo_list}',[TodoListController::class,'show'])->name('todo-list.show');
 
 Route::get('test',[TodoListController::class,'test'])->name('test');
+
+Route::post('todo-list',[TodoListController::class,'store'])->name('todo-list.store');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
