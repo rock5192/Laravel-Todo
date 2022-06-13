@@ -70,7 +70,53 @@ class TodoListTest extends TestCase
         $this->assertDatabaseHas('todo_lists',['name' => $list->name]);
         $this->assertEquals($list->name,$response['name']);
 
+    }
 
+    public function test_while_storing_todo_list_name_field_is_required()
+    {
+
+        $this->withExceptionHandling();
+
+        $this->postJson(route('todo-list.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_delete_todo_list()
+    {
+        //preparation
+
+        //action
+         $this->deleteJson(route('todo-list.destroy',$this->list->id))
+        ->assertNoContent();
+
+
+        //assertion
+        $this->assertDatabaseMissing('todo_lists',['name'=>$this->list->name]);
+    }
+
+    public function test_update_todo_list()
+    {
+        //preparation
+        $newList = TodoList::factory()->make();
+
+        //action
+        $response = $this->patchJson(route('todo-list.update',$this->list->id),['name' => $newList->name])
+            ->assertOk()
+            ->json();
+
+        //assertion
+        $this->assertDatabaseHas('todo_lists',['id'=>$this->list->id,'name' => $newList->name]);
+        $this->assertEquals($response['name'],$newList->name);
+    }
+
+    public function test_while_update_todo_list_name_field_is_required()
+    {
+        $this->withExceptionHandling();
+
+        $this->patchJson(route('todo-list.update',$this->list->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['name']);
     }
 }
 

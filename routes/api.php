@@ -23,6 +23,10 @@ Route::get('test',[TodoListController::class,'test'])->name('test');
 
 Route::post('todo-list',[TodoListController::class,'store'])->name('todo-list.store');
 
+Route::delete('todo-list/{todo_list}',[TodoListController::class,'destroy'])->name('todo-list.destroy');
+
+Route::patch('todo-list/{todo_list}',[TodoListController::class,'update'])->name('todo-list.update');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
