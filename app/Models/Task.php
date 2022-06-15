@@ -9,7 +9,11 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'todo_list_id'];
+    public const NotCompleted = "not completed";
+    public const Completed = 'completed';
+    public const Pending = 'pending';
+
+    protected $fillable = ['title' , 'todo_list_id', 'status'];
 
 
     public function todo_list()

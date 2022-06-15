@@ -21,6 +21,8 @@ Route::apiResource('todo-list',TodoListController::class);
 Route::apiResource('todo-list.task',TaskController::class)->except('show')
 ->shallow();
 
+//Route::post('task/completed',[TaskCompletedCOn])
+
 
 
 //Route::get('todo-list',[TodoListController::class,'index'])->name('todo-list.index');
