@@ -15,8 +15,10 @@ class ItemTest extends TestCase
     {
 
         $list = $this->createTodoList();
+        $list2 = $this->createTodoList();
         $task = $this->createTask(['todo_list_id' => $list->id]);
-        $this->createTask(['todo_list_id' => 2]);
+        $task2 = $this->createTask(['todo_list_id' => $list2->id]);
+
 
         $response = $this->getJson(route('todo-list.task.index',$list->id))
         ->assertOk()
