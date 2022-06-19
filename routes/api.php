@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TodoListController;
 use Illuminate\Http\Request;
@@ -20,6 +22,12 @@ Route::apiResource('todo-list',TodoListController::class);
 
 Route::apiResource('todo-list.task',TaskController::class)->except('show')
 ->shallow();
+
+Route::post('login',LoginController::class)->name('user.login');
+
+Route::post('register',RegisterController::class)->name('user.register');
+
+
 
 //Route::post('task/completed',[TaskCompletedCOn])
 
