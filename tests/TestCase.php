@@ -4,7 +4,9 @@ namespace Tests;
 
 use App\Models\Task;
 use App\Models\TodoList;
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Laravel\Sanctum\Sanctum;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -25,4 +27,16 @@ abstract class TestCase extends BaseTestCase
     {
         return Task::factory()->create($args);
     }
+
+    public function createUser($args = [])
+    {
+        return User::factory()->create();
+    }
+
+    public function authUser($args = [])
+    {
+        Sanctum::actingAs($this->createUser());
+    }
+
+
 }
