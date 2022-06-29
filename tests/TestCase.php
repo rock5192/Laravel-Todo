@@ -18,9 +18,9 @@ abstract class TestCase extends BaseTestCase
         $this->withoutExceptionHandling();
     }
 
-    public function createTodoList()
+    public function createTodoList($args = [])
     {
-        return TodoList::factory()->create(['name' => 'my List']);
+        return TodoList::factory()->create($args);
     }
 
     public function createTask($args = [])
@@ -30,12 +30,13 @@ abstract class TestCase extends BaseTestCase
 
     public function createUser($args = [])
     {
-        return User::factory()->create();
+        return User::factory()->create($args);
     }
 
     public function authUser($args = [])
     {
-        Sanctum::actingAs($this->createUser());
+        $user = $this->createUser($args);
+        return Sanctum::actingAs($user);
     }
 
 
