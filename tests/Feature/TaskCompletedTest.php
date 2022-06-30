@@ -21,9 +21,8 @@ class TaskCompletedTest extends TestCase
     {
 
         $task = $this->createTask();
-
-        $this->patchJson(route('task.update',$task->id),['status' => Task::Completed]);
-
-        $this->assertDatabaseHas('tasks',['status' => Task::Completed]);
+        $this->patchJson(route('task.update', $task->id),
+            ['title' => $task->title, 'status' => Task::Completed]);
+        $this->assertDatabaseHas('tasks', ['status' => Task::Completed]);
     }
 }

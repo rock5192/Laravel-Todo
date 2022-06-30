@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TaskController extends Controller
         return response($task);
     }
 
-    public function store(Request $request, TodoList $todo_list)
+    public function store(TaskRequest $request, TodoList $todo_list)
     {
 
         $task = $todo_list->tasks()->create($request->all());
@@ -31,7 +32,7 @@ class TaskController extends Controller
         return response($task,Response::HTTP_NO_CONTENT);
     }
 
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         $task->update($request->all());
         return response($task,Response::HTTP_OK);

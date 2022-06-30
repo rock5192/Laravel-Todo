@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->foreignId('todo_list_id')->constrained()->onDelete('cascade');
+            $table->foreignId('label_id')->nullable()->constrained();
             $table->string('status')->default(Task::NotCompleted);
             $table->timestamps();
         });
